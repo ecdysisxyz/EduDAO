@@ -1,12 +1,16 @@
 ```mermaid
 flowchart TD
-    A[Start] --> B[Claim All]
-    B --> C{Check Banned?}
-    C -->|Yes| G[Revert Transaction]
-    C -->|No| D[Claim process]
-    D --> E{Check unclaimed?}
-    E -->|No| G[Revert Transaction]
-    E -->|Yes| H[Withdraw minted governance token pool and set unclaimed zero.]
-    H --> I[Emit TokensClaimed Event]
-    I --> J[End]
-    G --> J
+    A[Start] --> B[Check User ID]
+    B --> C{Valid User?}
+    C -->|Yes| D[Get Current Timeframe]
+    D --> E[Calculate Mintable Tokens]
+    E --> F{Mintable Tokens > 0?}
+    F -->|Yes| G[Update Minted Amount]
+    G --> H[Reset User Score]
+    H --> I[Mint Tokens to User]
+    I --> J[Emit TokensClaimed Event]
+    J --> K[End]
+    F -->|No| L[Revert Transaction]
+    L --> K
+    C -->|No| M[Revert Transaction]
+    M --> K

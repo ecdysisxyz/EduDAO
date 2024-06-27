@@ -1,87 +1,105 @@
 ```mermaid
 erDiagram
     USER {
-        int UserID PK
-        string UserName
-        string UserType
-        string Status
+        int userID PK
+        string userName
+        string userType
+        string status
     }
     
     JOBLISTING {
-        int JobID PK
-        int EmployerID FK
-        string JobDescription
-        float ProposedSalary
-        float EscrowAmount
+        int jobID PK
+        int employerID FK
+        string jobDescription
+        uint256 proposedSalary
+        uint256 escrowAmount
     }
 
     SKILLSET {
-        int SkillID PK
-        int TeacherID FK
-        string SkillDescription
-        float HourlyRate
+        int skillID PK
+        int teacherID FK
+        string skillDescription
+        uint256 hourlyRate
     }
 
     RESUME {
-        int ResumeID PK
-        int LearnerID FK
-        string DesiredSkills
-        string ProjectIdeas
+        int resumeID PK
+        int learnerID FK
+        string desiredSkills
+        string projectIdeas
     }
 
     SPONSORFLAG {
-        int FlagID PK
-        int EmployerID FK
-        int LearnerID FK
-        string Status
+        int flagID PK
+        int employerID FK
+        int learnerID FK
+        string status
     }
 
     LEARNINGMATCH {
-        int MatchID PK
-        int TeacherID FK
-        int LearnerID FK
-        float LearningHours
-        datetime Timestamp
+        int matchID PK
+        int teacherID FK
+        int learnerID FK
+        uint256 learningHours
+        uint256 timestamp
     }
 
     EMPLOYMENTMATCH {
-        int EmploymentID PK
-        int EmployerID FK
-        int LearnerID FK
-        string Status
+        int employmentID PK
+        int employerID FK
+        int learnerID FK
+        string status
     }
 
     GOVERNANCETOKEN {
-        int TokenID PK
-        int UserID FK
-        float TokenAmount
-        float UnclaimedAmount
+        int tokenID PK
+        int userID FK
+        uint256 tokenAmount
+        uint256 unclaimedAmount
     }
 
     STAKE {
-        int StakeID PK
-        int UserID FK
-        float Amount
-        datetime Timestamp
-        string Status
+        int stakeID PK
+        int userID FK
+        uint256 amount
+        uint256 timestamp
+        string status
     }
 
-    USER ||--o{ JOBLISTING : "投稿する"
-    USER ||--o{ SKILLSET : "提示する"
-    USER ||--|| RESUME : "持つ"
-    USER ||--o{ SPONSORFLAG : "立てる"
-    USER ||--o{ LEARNINGMATCH : "教える/学ぶ"
-    USER ||--o{ EMPLOYMENTMATCH : "雇う/雇われる"
-    USER ||--o{ GOVERNANCETOKEN : "保有する"
-    USER ||--o{ STAKE : "ステークする"
-    JOBLISTING ||--|{ USER : "雇用主"
-    SKILLSET ||--|{ USER : "教師"
-    RESUME ||--|{ USER : "学習者"
-    SPONSORFLAG ||--|{ USER : "雇用主"
-    SPONSORFLAG ||--|{ USER : "学習者"
-    LEARNINGMATCH ||--|{ USER : "教師"
-    LEARNINGMATCH ||--|{ USER : "学習者"
-    EMPLOYMENTMATCH ||--|{ USER : "雇用主"
-    EMPLOYMENTMATCH ||--|{ USER : "学習者"
-    GOVERNANCETOKEN ||--|{ USER : "保有者"
-    STAKE ||--|{ USER : "ステーク者"
+    TIMEFRAME {
+        int timeframeID PK
+        uint256 startTime
+        uint256 endTime
+        uint256 totalMintableAmount
+        uint256 totalMintedAmount
+    }
+
+    SCORE {
+        int scoreID PK
+        int userID FK
+        int timeframeID FK
+        uint256 score
+        uint256 share
+    }
+
+    USER ||--o{ JOBLISTING : "posts"
+    USER ||--o{ SKILLSET : "offers"
+    USER ||--|| RESUME : "has"
+    USER ||--o{ SPONSORFLAG : "sets"
+    USER ||--o{ LEARNINGMATCH : "participates in"
+    USER ||--o{ EMPLOYMENTMATCH : "engages in"
+    USER ||--o{ GOVERNANCETOKEN : "holds"
+    USER ||--o{ STAKE : "makes"
+    USER ||--o{ SCORE : "owns"
+    JOBLISTING ||--|{ USER : "employer"
+    SKILLSET ||--|{ USER : "teacher"
+    RESUME ||--|{ USER : "learner"
+    SPONSORFLAG ||--|{ USER : "employer"
+    SPONSORFLAG ||--|{ USER : "learner"
+    LEARNINGMATCH ||--|{ USER : "teacher"
+    LEARNINGMATCH ||--|{ USER : "learner"
+    EMPLOYMENTMATCH ||--|{ USER : "employer"
+    EMPLOYMENTMATCH ||--|{ USER : "learner"
+    GOVERNANCETOKEN ||--|{ USER : "holder"
+    STAKE ||--|{ USER : "staker"
+    TIMEFRAME ||--o{ SCORE : "contains"

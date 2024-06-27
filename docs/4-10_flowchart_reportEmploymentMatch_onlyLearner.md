@@ -1,18 +1,22 @@
 ```mermaid
 flowchart TD
     A[Start] --> B[Check Employer ID]
-    B --> C[Check Learner ID]
-    C --> D[Check Employment Details]
-    D --> E{Valid Inputs and Not Banned?}
-    E -->|Yes| F[Store Report Data]
-    F --> G{Both Parties Submitted?}
-    G -->|Yes| H[Compare Data]
-    H --> I{Data Match?}
-    I -->|Yes| J[Record Employment Match]
-    J --> K[Emit EmploymentMatchReported Event]
-    K --> L[End]
-    I -->|No| M[Revert Transaction]
-    M --> L
-    G -->|No| L[Wait for Other Party]
-    E -->|No| N[Revert Transaction]
-    N --> L
+    B --> C{Valid Employer?}
+    C -->|Yes| D[Check Learner ID]
+    D --> E{Valid Learner?}
+    E -->|Yes| F[Check Employment Details]
+    F --> G{Valid Inputs?}
+    G -->|Yes| H[Store Report Data]
+    H --> I{Both Parties Submitted?}
+    I -->|Yes| J[Compare Data]
+    J --> K{Data Match?}
+    K -->|Yes| L[Allocate Score]
+    L --> M[Emit EmploymentMatchReported Event]
+    M --> N[End]
+    K -->|No| O[Revert Transaction]
+    O --> N
+    I -->|No| N[Wait for Other Party]
+    G -->|No| P[Revert Transaction]
+    P --> N
+    E -->|No| P
+    C -->|No| P

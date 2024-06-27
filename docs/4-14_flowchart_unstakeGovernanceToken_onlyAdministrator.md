@@ -6,7 +6,7 @@ flowchart TD
     D --> E{Valid Staked Amount?}
     E -->|Yes| F[Check Stake Duration]
     F --> G{Stake Duration >= 2 weeks?}
-    G -->|Yes| H[Unstake Tokens]
+    G -->|Yes| H[Transfer Tokens to User]
     H --> I[Emit TokensUnstaked Event]
     I --> J[End]
     G -->|No| K[Revert Transaction]
