@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.23;
 
-import "../storage/Storage.sol";
-import "../storage/Schema.sol";
+import { Storage } from "../storage/Storage.sol";
+import { Schema } from  "../storage/Schema.sol";
 
 contract PostJobListing {
     function postJobListing(
@@ -10,11 +10,11 @@ contract PostJobListing {
         uint256 proposedSalary,
         uint256 escrowAmount
     ) external {
-        Schema.GlobalState storage s = Storage.state();
-        require(!s.banned[msg.sender], "User is banned");
+        Schema.GlobalState storage $s = Storage.state();
+        require(!$s.banned[msg.sender], "User is banned");
 
-        uint256 jobID = s.nextJobListingID++;
-        Schema.JobListing storage jobListing = s.jobListings[jobID];
+        uint256 jobID = $s.nextJobListingID++;
+        Schema.JobListing storage jobListing = $s.jobListings[jobID];
         jobListing.jobID = jobID;
         jobListing.employerID = msg.sender;
         jobListing.jobDescription = jobDescription;

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.23;
 
-import "../storage/Storage.sol";
-import "../storage/Schema.sol";
+import { Storage } from "../storage/Storage.sol";
+import { Schema } from  "../storage/Schema.sol";
 
 contract ReportLearningHours {
     function reportLearningHours(
@@ -10,13 +10,13 @@ contract ReportLearningHours {
         address learnerID,
         uint256 learningHours
     ) external {
-        Schema.GlobalState storage s = Storage.state();
-        require(!s.banned[msg.sender], "User is banned");
-        require(!s.banned[teacherID], "Teacher is banned");
-        require(!s.banned[learnerID], "Learner is banned");
+        Schema.GlobalState storage $s = Storage.state();
+        require(!$s.banned[msg.sender], "User is banned");
+        require(!$s.banned[teacherID], "Teacher is banned");
+        require(!$s.banned[learnerID], "Learner is banned");
 
-        uint256 matchID = s.nextLearningMatchID++;
-        Schema.LearningMatch storage learningMatch = s.learningMatches[matchID];
+        uint256 matchID = $s.nextLearningMatchID++;
+        Schema.LearningMatch storage learningMatch = $s.learningMatches[matchID];
         learningMatch.matchID = matchID;
         learningMatch.teacherID = teacherID;
         learningMatch.learnerID = learnerID;

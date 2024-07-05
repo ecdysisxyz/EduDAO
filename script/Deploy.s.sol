@@ -5,19 +5,19 @@ import {MCScript, MCDevKit} from "@mc/devkit/Flattened.sol";
 import {DeployLib} from "./DeployLib.sol";
 
 // Import all function contracts
-import {AddLiquidity} from "bundle/dao/functions/AddLiquidity.sol";
-import {BurnGovernanceToken} from "bundle/dao/functions/BurnGovernanceToken.sol";
-import {ClaimGovernanceToken} from "bundle/dao/functions/ClaimGovernanceToken.sol";
-import {PostJobListing} from "bundle/dao/functions/PostJobListing.sol";
-import {PostSkillSet} from "bundle/dao/functions/PostSkillSet.sol";
-import {ReportEmploymentMatch} from "bundle/dao/functions/ReportEmploymentMatch.sol";
-import {ReportLearningHours} from "bundle/dao/functions/ReportLearningHours.sol";
-import {SponsorLearner} from "bundle/dao/functions/SponsorLearner.sol";
-import {Stake} from "bundle/dao/functions/Stake.sol";
-import {SubmitResume} from "bundle/dao/functions/SubmitResume.sol";
-import {Swap} from "bundle/dao/functions/Swap.sol";
-import {Unstake} from "bundle/dao/functions/Unstake.sol";
-import {InvestigateMatch} from "bundle/dao/functions/InvestigateMatch.sol";
+import {AddLiquidity} from "bundle/main/functions/AddLiquidity.sol";
+import {BurnGovernanceToken} from "bundle/main/functions/BurnGovernanceToken.sol";
+import {ClaimGovernanceToken} from "bundle/main/functions/ClaimGovernanceToken.sol";
+import {PostJobListing} from "bundle/main/functions/PostJobListing.sol";
+import {PostSkillSet} from "bundle/main/functions/PostSkillSet.sol";
+import {ReportEmploymentMatch} from "bundle/main/functions/ReportEmploymentMatch.sol";
+import {ReportLearningHours} from "bundle/main/functions/ReportLearningHours.sol";
+import {SponsorLearner} from "bundle/main/functions/SponsorLearner.sol";
+import {Stake} from "bundle/main/functions/Stake.sol";
+import {SubmitResume} from "bundle/main/functions/SubmitResume.sol";
+import {Swap} from "bundle/main/functions/Swap.sol";
+import {Unstake} from "bundle/main/functions/Unstake.sol";
+import {InvestigateMatch} from "bundle/main/functions/InvestigateMatch.sol";
 
 // Import facade contract for proxy interactions
 import {DAOFacade} from "./DAOFacade.sol";
